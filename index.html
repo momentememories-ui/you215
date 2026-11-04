@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy Anniversary❤️</title>
+    <title>Happy Birthday🎂✨</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -20,13 +20,14 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background-color: #ffe6eb;
+            /* เปลี่ยนพื้นหลังเป็นโทนพาสเทลเหลือง-ชมพู-ฟ้า */
+            background: linear-gradient(135deg, #fff9e6 0%, #ffe6eb 50%, #e6f2ff 100%);
             font-family: 'Kanit', sans-serif;
             color: #4a0e17;
             position: relative;
         }
 
-        /* Floating Hearts Layer */
+        /* Floating Elements Layer */
         #heart-container {
             position: fixed;
             top: 0;
@@ -44,7 +45,7 @@
             font-size: 24px;
             animation: floatUp linear forwards;
             opacity: 0.9;
-            filter: drop-shadow(0 2px 5px rgba(255, 105, 180, 0.4));
+            filter: drop-shadow(0 2px 5px rgba(255, 192, 203, 0.4));
         }
 
         @keyframes floatUp {
@@ -107,8 +108,9 @@
             max-height: 85vw;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
             background: #fff;
+            border: 4px solid #fff;
         }
 
         .scratch-area img {
@@ -156,7 +158,7 @@
 </head>
 <body>
 
-    <!-- Floating Hearts Layer -->
+    <!-- Floating Elements Layer -->
     <div id="heart-container"></div>
 
     <!-- Static Background for Scratch Pages -->
@@ -190,14 +192,14 @@
             });
         });
 
-        // Floating Hearts Generator
+        // Floating Birthday & Celebration Emojis (เหลือง, ชมพู, ฟ้า)
         const heartContainer = document.getElementById('heart-container');
-        const heartEmojis = ['❤️', '💖', '💗', '💓', '💕', '🌸', '✨'];
+        const birthdayEmojis = ['💛', '💖', '💙', '🎂', '🎈', '🎉', '✨', '🎁', '🌟', '💛'];
 
         function spawnHeart() {
             const heart = document.createElement('div');
             heart.classList.add('floating-heart');
-            heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+            heart.textContent = birthdayEmojis[Math.floor(Math.random() * birthdayEmojis.length)];
             heart.style.left = Math.random() * 100 + 'vw';
             heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
             heart.style.fontSize = (Math.random() * 15 + 20) + 'px';
@@ -213,13 +215,13 @@
             }
         }
 
-        function triggerHeartBurst(count = 25) {
+        function triggerHeartBurst(count = 30) {
             for (let i = 0; i < count; i++) {
-                setTimeout(spawnHeart, i * 80);
+                setTimeout(spawnHeart, i * 70);
             }
         }
 
-        // Photos Config (เพิ่ม photo7.jpg เข้ามา)
+        // Photos Config
         const photos = ['photo1.jpg', 'photo2.jpg', 'photo3.jpg', 'photo4.jpg', 'photo7.jpg'];
         let currentStep = 0;
 
@@ -240,7 +242,8 @@
             if (overlayImg.complete && overlayImg.naturalWidth !== 0) {
                 ctx.drawImage(overlayImg, 0, 0, size, size);
             } else {
-                ctx.fillStyle = '#ffb7c5';
+                // สีฟิล์มขูดโทนพาสเทลสดใส (เหลืองอ่อนอมชมพู)
+                ctx.fillStyle = '#fffae6';
                 ctx.fillRect(0, 0, size, size);
             }
         }
@@ -296,12 +299,13 @@
                 ctx.clearRect(0, 0, size, size);
 
                 if (currentStep === photos.length - 1) {
-                    // รูปสุดท้ายขูดเสร็จแล้ว ไปหน้า photo5.png
+                    // เมื่อขูด photo7.jpg เสร็จ: จุดพลุ/อิโมจิลอยก่อน แล้วค่อยเข้าหน้าสุดท้าย (photo5.png)
+                    triggerHeartBurst(40);
                     setTimeout(() => {
                         showFinalPage();
-                    }, 1000);
+                    }, 1500);
                 } else {
-                    // รูปก่อนหน้า: เปลี่ยนไปยังรูปถัดไป
+                    // รูปก่อนหน้า: เปลี่ยนไปยังรูปถัดไปปกติ
                     setTimeout(() => {
                         nextPhoto();
                     }, 1200);
@@ -329,7 +333,7 @@
             setTimeout(() => {
                 const finalPage = document.getElementById('page-final');
                 finalPage.classList.add('active');
-                triggerHeartBurst(40);
+                triggerHeartBurst(45);
                 startHeartShower();
             }, 800);
         }
