@@ -61,7 +61,7 @@
             }
         }
 
-        /* Continuous Background Layer for Pages 1-4 (Cover Full Screen) */
+        /* Continuous Background Layer for Scratch Pages (Cover Full Screen) */
         #main-bg-layer {
             position: fixed;
             top: 0;
@@ -131,7 +131,7 @@
             touch-action: none;
         }
 
-        /* Final Page 5 Style (Full Screen photo5.png) */
+        /* Final Page Style (Full Screen photo5.png) */
         #page-final {
             position: fixed;
             top: 0;
@@ -177,7 +177,7 @@
         </div>
     </div>
 
-    <!-- PAGE 5 (Full Screen photo5.png) -->
+    <!-- Final Page (Full Screen photo5.png) -->
     <div id="page-final"></div>
 
     <script>
@@ -219,8 +219,8 @@
             }
         }
 
-        // Photos Config
-        const photos = ['photo1.jpg', 'photo2.jpg', 'photo3.jpg', 'photo4.jpg'];
+        // Photos Config (เพิ่ม photo7.jpg เข้ามา)
+        const photos = ['photo1.jpg', 'photo2.jpg', 'photo3.jpg', 'photo4.jpg', 'photo7.jpg'];
         let currentStep = 0;
 
         const scratchWrapper = document.getElementById('scratch-wrapper');
@@ -295,16 +295,13 @@
                 completed = true;
                 ctx.clearRect(0, 0, size, size);
 
-                if (currentStep === 3) {
-                    // Page 4 Completed
-                    triggerHeartBurst(35);
-                    
-                    // Delay 5 seconds on Page 4 before moving to Page 5
+                if (currentStep === photos.length - 1) {
+                    // รูปสุดท้ายขูดเสร็จแล้ว ไปหน้า photo5.png
                     setTimeout(() => {
                         showFinalPage();
-                    }, 5000);
+                    }, 1000);
                 } else {
-                    // Pages 1-3 Completed: Switch smoothly to next photo
+                    // รูปก่อนหน้า: เปลี่ยนไปยังรูปถัดไป
                     setTimeout(() => {
                         nextPhoto();
                     }, 1200);
